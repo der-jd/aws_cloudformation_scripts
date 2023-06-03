@@ -1,0 +1,26 @@
+name: CI
+
+on: [push]
+
+jobs:
+  lint-python-code:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install dependencies
+      run: pip install -r ./requirements.txt
+    - name: Install pylint
+      run: pip install pylint
+    - name: Lint code
+      run: make lint-python
+
+  type-check-python-code:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install dependencies
+      run: pip install -r ./requirements.txt
+    - name: Install pyright
+      run: pip install pyright
+    - name: Check types
+      run: make typecheck-python
